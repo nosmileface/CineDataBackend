@@ -26,13 +26,13 @@ class GetMovieCrewsService
 
         $movieCrews = $this->getMovieCrews(movieId: $movie->tmdb_id);
 
-        if (empty($movieCrews[self::MOVIE_CREWS_KEY]))
-        {
-            return 0;
-        }
-
         foreach ($movieCrews[self::MOVIE_CREWS_KEY] as $movieCrew)
         {
+            if (empty($movieCrew))
+            {
+                continue;
+            }
+
             $data = $this->movieCrewRepository->updateOrCreate(data: $movieCrew);
 
             $ids[$data['id']] = ['department' => $movieCrew['department']];

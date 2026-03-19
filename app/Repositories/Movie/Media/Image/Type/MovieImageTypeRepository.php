@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\Movie\Media\Image;
+namespace App\Repositories\Movie\Media\Image\Type;
 
-use App\Models\Movie\Media\Image\MovieImageType;
+use App\Models\Movie\Media\Image\Type\MovieImageType;
 
 class MovieImageTypeRepository
 {

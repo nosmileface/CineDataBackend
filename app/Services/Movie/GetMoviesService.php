@@ -30,7 +30,7 @@ class GetMoviesService
         {
             $movies = $this->getMovies
             (
-                genreId: $movieGenre->tmdb_id,
+                movieGenreId: $movieGenre->tmdb_id,
                 page: $page
             );
 
@@ -69,11 +69,11 @@ class GetMoviesService
         return $imported;
     }
 
-    private function getMovies(int $genreId, int $page): array
+    private function getMovies(int $movieGenreId, int $page): array
     {
         return $this->TMDBClientService->fetchMovies
         (
-            genreId: $genreId,
+            movieGenreId: $movieGenreId,
             page: $page
         );
     }

@@ -34,7 +34,7 @@ class ImportMovieCrews extends Command
 
             $end = microtime(true);
 
-            $this->info('Синхронизация успешна. Получено актеров: ' . $count . '. Затрачено времени: ' . $end - $start . ' секнд(ы).');
+            $this->info('Синхронизация успешна. Получено членов команд: ' . $count . '. Затрачено времени: ' . $end - $start . ' секнд(ы).');
 
             return CommandAlias::SUCCESS;
 

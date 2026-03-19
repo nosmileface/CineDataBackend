@@ -4,7 +4,7 @@ namespace App\Services\Movie\Media\Image;
 
 use App\Models\Movie\Movie;
 use App\Repositories\Movie\Media\Image\MovieImageRepository;
-use App\Repositories\Movie\Media\Image\MovieImageTypeRepository;
+use App\Repositories\Movie\Media\Image\Type\MovieImageTypeRepository;
 use App\Services\TMDBClientService;
 
 class GetMovieImagesService

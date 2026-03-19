@@ -35,7 +35,7 @@ class TestController extends Controller
         return response()->json
         (
             [
-                'message' => 'Жанры фильмов получены. Количество: ' . $genres . '.',
+                'message' => 'Жанры фильмов получены. Количество: ' . $genres . ' жанров.',
                 'code' => JsonResponse::HTTP_CREATED
             ]
         );
@@ -52,7 +52,7 @@ class TestController extends Controller
         return response()->json
         (
             [
-                'message' => 'Фильмы для конкретного жанра получены. Количество: ' . $movies . '.',
+                'message' => 'Фильмы для конкретного жанра получены. Количество: ' . $movies . ' фильмов.',
                 'code' => JsonResponse::HTTP_CREATED
             ]
         );
@@ -65,7 +65,7 @@ class TestController extends Controller
         return response()->json
         (
             [
-                'message' => 'Актеры для конкретного фильма получены. Количество: ' . $movieCasts . '.',
+                'message' => 'Актеры для конкретного фильма получены. Количество: ' . $movieCasts . ' актеров.',
                 'code' => JsonResponse::HTTP_CREATED
             ]
         );
@@ -78,7 +78,7 @@ class TestController extends Controller
         return response()->json
         (
             [
-                'message' => 'Команды для конкретного фильма получены. Количество: ' . $movieCrews . '.',
+                'message' => 'Команды для конкретного фильма получены. Количество: ' . $movieCrews . ' членов команд.',
                 'code' => JsonResponse::HTTP_CREATED
             ]
         );
@@ -91,7 +91,7 @@ class TestController extends Controller
         return response()->json
         (
             [
-                'message' => 'Картинки для конкретного фильма получены. Количество: ' . $movieImages . '.',
+                'message' => 'Картинки для конкретного фильма получены. Количество: ' . $movieImages . ' картинок.',
                 'code' => JsonResponse::HTTP_CREATED
             ]
         );
@@ -104,7 +104,7 @@ class TestController extends Controller
         return response()->json
         (
             [
-                'message' => 'Видео для конкретного фильма получены. Количество: ' . $movieVideos . '.',
+                'message' => 'Видео для конкретного фильма получены. Количество: ' . $movieVideos . ' видео.',
                 'code' => JsonResponse::HTTP_CREATED
             ]
         );
