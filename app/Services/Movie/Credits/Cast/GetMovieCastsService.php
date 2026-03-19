@@ -13,8 +13,8 @@ class GetMovieCastsService
 
     public function __construct
     (
-        private TMDBClientService $TMDBClientService,
-        private MovieRepository $movieRepository,
+        private TMDBClientService   $TMDBClientService,
+        private MovieRepository     $movieRepository,
         private MovieCastRepository $movieCastRepository
     ){}
 

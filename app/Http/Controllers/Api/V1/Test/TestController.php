@@ -14,9 +14,9 @@ class TestController extends Controller
 {
     public function __construct
     (
-        private GetMovieGenresService $getMovieGenresService,
-        private GetMoviesService $getMoviesService,
-        private GetMovieCastsService $getMovieCastsService
+        private GetMovieGenresService   $getMovieGenresService,
+        private GetMoviesService        $getMoviesService,
+        private GetMovieCastsService    $getMovieCastsService
     )
     {}
 

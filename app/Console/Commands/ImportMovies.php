@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Repositories\Movie\Genre\MovieGenresRepository;
+use App\Repositories\Movie\Genre\MovieGenreRepository;
 use App\Services\Movie\GetMoviesService;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
@@ -18,7 +18,7 @@ class ImportMovies extends Command
     /**
      * Execute the console command.
      */
-    public function handle(GetMoviesService $getMoviesService, MovieGenresRepository $movieGenresRepository): int
+    public function handle(GetMoviesService $getMoviesService, MovieGenreRepository $movieGenresRepository): int
     {
         try {
             $count = 0;
