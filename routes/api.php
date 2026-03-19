@@ -14,5 +14,9 @@ Route::prefix('v1')->group(function () {
             V1\Test\TestController::class, 'GetMovies'
         ])->name('get.movies');
 
+        Route::get('movies/{movie}/casts', [
+            V1\Test\TestController::class, 'GetMovieCasts'
+        ])->name('get.movie.casts');
+
     });
 });
