@@ -3,20 +3,20 @@
 namespace App\Console\Commands;
 
 use App\Repositories\Movie\MovieRepository;
-use App\Services\Movie\Credits\Cast\GetMovieCastsService;
+use App\Services\Movie\Credits\Crew\GetMovieCrewsService;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Command\Command as CommandAlias;
 
-#[Signature('app:import-movie-casts')]
-#[Description('Синхронизация актеров для каждого фильма.')]
-class ImportMovieCasts extends Command
+#[Signature('app:import-movie-crews')]
+#[Description('Синхронизация команды для каждого фильма.')]
+class ImportMovieCrews extends Command
 {
     /**
      * Execute the console command.
      */
-    public function handle(GetMovieCastsService $getMovieCastsService, MovieRepository $movieRepository): int
+    public function handle(GetMovieCrewsService $getMovieCrewsService, MovieRepository $movieRepository): int
     {
         try {
             $count = 0;
@@ -27,9 +27,9 @@ class ImportMovieCasts extends Command
 
             foreach ($movies as $movie)
             {
-                $movieCast = $getMovieCastsService->syncMovieCasts(movie: $movie);
+                $movieCrew = $getMovieCrewsService->syncMovieCrews(movie: $movie);
 
-                $count += $movieCast;
+                $count += $movieCrew;
             }
 
             $end = microtime(true);

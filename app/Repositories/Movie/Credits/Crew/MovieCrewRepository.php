@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Repositories\Movie\Credits\Cast;
+namespace App\Repositories\Movie\Credits\Crew;
 
-use App\Models\Movie\Credits\Cast\MovieCast;
+use App\Models\Movie\Credits\Crew\MovieCrew;
 
-class MovieCastRepository
+class MovieCrewRepository
 {
-    public function __construct(private MovieCast $movieCast){}
+    public function __construct(private MovieCrew $movieCrew){}
 
-    public function updateOrCreate(array $data): MovieCast
+    public function updateOrCreate(array $data): MovieCrew
     {
-        return $this->movieCast->query()->updateOrCreate
+        return $this->movieCrew->query()->updateOrCreate
         (
             [
                 'tmdb_id' => $data['id']

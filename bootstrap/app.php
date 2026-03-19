@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $schedule->command('app:import-movie-genres')->daily();
         $schedule->command('app:import-movies')->daily();
         $schedule->command('app:import-movie-casts')->daily();
+        $schedule->command('app:import-movie-crews')->daily();
     })
     ->withMiddleware(function (Middleware $middleware): void {
         //
