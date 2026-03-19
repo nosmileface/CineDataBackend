@@ -2,7 +2,7 @@
 
 namespace App\Services\Movie\Genre;
 
-use App\Repositories\Movie\Genre\MovieGenresRepository;
+use App\Repositories\Movie\Genre\MovieGenreRepository;
 use App\Services\TMDBClientService;
 
 class GetMovieGenresService
@@ -11,8 +11,8 @@ class GetMovieGenresService
 
     public function __construct
     (
-        private TMDBClientService $TMDBClientService,
-        private MovieGenresRepository $movieGenresRepository
+        private TMDBClientService    $TMDBClientService,
+        private MovieGenreRepository $movieGenresRepository
     ){}
 
     public function syncGenres(): int

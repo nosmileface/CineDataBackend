@@ -6,7 +6,7 @@ use App\Models\Movie\Genre\MovieGenre;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 
-class MovieGenresRepository
+class MovieGenreRepository
 {
     public function __construct(private MovieGenre $movieGenre){}
 

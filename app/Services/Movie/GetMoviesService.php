@@ -3,7 +3,7 @@
 namespace App\Services\Movie;
 
 use App\Models\Movie\Genre\MovieGenre;
-use App\Repositories\Movie\Genre\MovieGenresRepository;
+use App\Repositories\Movie\Genre\MovieGenreRepository;
 use App\Repositories\Movie\MovieRepository;
 use App\Services\TMDBClientService;
 
@@ -13,9 +13,9 @@ class GetMoviesService
 
     public function __construct
     (
-        private TMDBClientService $TMDBClientService,
-        private MovieGenresRepository $movieGenresRepository,
-        private MovieRepository $movieRepository
+        private TMDBClientService    $TMDBClientService,
+        private MovieGenreRepository $movieGenresRepository,
+        private MovieRepository      $movieRepository
     ){}
 
     public function syncMovies(MovieGenre $movieGenre, int $limit): int
