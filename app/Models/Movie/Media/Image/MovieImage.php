@@ -2,6 +2,7 @@
 
 namespace App\Models\Movie\Media\Image;
 
+use App\Models\Movie\Media\Image\Type\MovieImageType;
 use App\Models\Movie\Movie;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

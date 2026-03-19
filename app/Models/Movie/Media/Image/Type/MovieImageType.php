@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models\Movie\Media\Image;
+namespace App\Models\Movie\Media\Image\Type;
 
+use App\Models\Movie\Media\Image\MovieImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 

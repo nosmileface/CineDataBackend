@@ -19,16 +19,16 @@ class GetMovieGenresService
     {
         $imported = 0;
 
-        $genres = $this->getMovieGenres();
+        $moviegenres = $this->getMovieGenres();
 
-        if (empty($genres[self::MOVIE_GENRES_KEY]))
+        if (empty($moviegenres[self::MOVIE_GENRES_KEY]))
         {
             return 0;
         }
 
-        foreach ($genres[self::MOVIE_GENRES_KEY] as $genre)
+        foreach ($moviegenres[self::MOVIE_GENRES_KEY] as $movieGenre)
         {
-            $this->movieGenresRepository->updateOrCreate(data: $genre);
+            $this->movieGenresRepository->updateOrCreate(data: $movieGenre);
 
             $imported++;
         }

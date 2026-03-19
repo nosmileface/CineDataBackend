@@ -34,7 +34,7 @@ class ImportMovieVideos extends Command
 
             $end = microtime(true);
 
-            $this->info('Синхронизация успешна. Получено видео: ' . $count . '. Затрачено времени: ' . $end - $start . ' секнд(ы).');
+            $this->info('Синхронизация успешна. Получено видео: ' . $count . '. Затрачено времени: ' . $end - $start . ' секунд(ы).');
 
             return CommandAlias::SUCCESS;
 

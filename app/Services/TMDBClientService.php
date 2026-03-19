@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Http;
 
 class TMDBClientService
 {
-    private const string GENRES_ENDPOINT = '/3/genre/movie/list';
+    private const string MOVIE_GENRES_ENDPOINT = '/3/genre/movie/list';
     private const string MOVIES_ENDPOINT = '/3/discover/movie';
     private const string MOVIE_CASTS_ENDPOINT = '/3/movie/%d/credits';
     private const string MOVIE_IMAGES_ENDPOINT = '/3/movie/%d/images';
@@ -39,7 +39,7 @@ class TMDBClientService
         );
     }
 
-    public function fetchMovies(int $genreId, int $page): array
+    public function fetchMovies(int $movieGenreId, int $page): array
     {
         return $this->fetch
         (
@@ -48,7 +48,7 @@ class TMDBClientService
             [
                 'api_key' => config('tmdb.TMDB_API_KEY'),
                 'language' => 'ru',
-                'with_genres' => $genreId,
+                'with_genres' => $movieGenreId,
                 'page' => $page
             ]
         );
@@ -58,7 +58,7 @@ class TMDBClientService
     {
         return $this->fetch
         (
-            endpoint: self::GENRES_ENDPOINT,
+            endpoint: self::MOVIE_GENRES_ENDPOINT,
             params:
             [
                'api_key' => config('tmdb.TMDB_API_KEY'),
