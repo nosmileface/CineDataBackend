@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('movie_images', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('movie_id')->constrained('movies')->cascadeOnDelete();
+            $table->foreignId('movie_image_type_id')->constrained('movie_image_types')->cascadeOnDelete();
+            $table->integer('width');
+            $table->integer('height');
+            $table->string('file_path');
+            $table->timestamps();
+
+            // Index
+            $table->index(['movie_id', 'type_id']);
+
+            // Unique
+            $table->unique(['movie_id', 'file_path']);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('movie_images');
+    }
+};

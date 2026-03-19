@@ -11,8 +11,8 @@ class GetMovieGenresService
 
     public function __construct
     (
-        private TMDBClientService    $TMDBClientService,
-        private MovieGenreRepository $movieGenresRepository
+        private TMDBClientService       $TMDBClientService,
+        private MovieGenreRepository    $movieGenresRepository
     ){}
 
     public function syncGenres(): int

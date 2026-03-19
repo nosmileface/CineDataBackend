@@ -13,9 +13,9 @@ class GetMovieCastsService
 
     public function __construct
     (
-        private TMDBClientService   $TMDBClientService,
-        private MovieRepository     $movieRepository,
-        private MovieCastRepository $movieCastRepository
+        private TMDBClientService       $TMDBClientService,
+        private MovieRepository         $movieRepository,
+        private MovieCastRepository     $movieCastRepository
     ){}
 
     public function syncMovieCasts(Movie $movie): int
