@@ -6,17 +6,25 @@ use App\Http\Controllers\Controller;
 use App\Models\Movie\Genre\MovieGenre;
 use App\Models\Movie\Movie;
 use App\Services\Movie\Credits\Cast\GetMovieCastsService;
+use App\Services\Movie\Credits\Crew\GetMovieCrewsService;
 use App\Services\Movie\Genre\GetMovieGenresService;
 use App\Services\Movie\GetMoviesService;
+use App\Services\Movie\Media\Image\GetMovieImagesService;
+use App\Services\Movie\Media\Video\GetMovieVideosService;
 use Illuminate\Http\JsonResponse;
 
 class TestController extends Controller
 {
+    private const int MOVIES_LIMIT_FOR_GENRE = 10;
+
     public function __construct
     (
         private GetMovieGenresService   $getMovieGenresService,
         private GetMoviesService        $getMoviesService,
-        private GetMovieCastsService    $getMovieCastsService
+        private GetMovieCastsService    $getMovieCastsService,
+        private GetMovieCrewsService    $getMovieCrewsService,
+        private GetMovieImagesService   $getMovieImagesService,
+        private GetMovieVideosService   $getMovieVideosService
     )
     {}
 
@@ -38,7 +46,7 @@ class TestController extends Controller
         $movies = $this->getMoviesService->syncMovies
         (
             movieGenre: $movieGenre,
-            limit: 10
+            limit: self::MOVIES_LIMIT_FOR_GENRE
         );
 
         return response()->json
@@ -58,6 +66,45 @@ class TestController extends Controller
         (
             [
                 'message' => 'Актеры для конкретного фильма получены. Количество: ' . $movieCasts . '.',
+                'code' => JsonResponse::HTTP_CREATED
+            ]
+        );
+    }
+
+    public function GetMovieCrews(Movie $movie): JsonResponse
+    {
+        $movieCrews = $this->getMovieCrewsService->syncMovieCrews(movie: $movie);
+
+        return response()->json
+        (
+            [
+                'message' => 'Команды для конкретного фильма получены. Количество: ' . $movieCrews . '.',
+                'code' => JsonResponse::HTTP_CREATED
+            ]
+        );
+    }
+
+    public function GetMovieImages(Movie $movie): JsonResponse
+    {
+        $movieImages = $this->getMovieImagesService->syncMovieImages(movie: $movie);
+
+        return response()->json
+        (
+            [
+                'message' => 'Картинки для конкретного фильма получены. Количество: ' . $movieImages . '.',
+                'code' => JsonResponse::HTTP_CREATED
+            ]
+        );
+    }
+
+    public function GetMovieVideos(Movie $movie): JsonResponse
+    {
+        $movieVideos = $this->getMovieVideosService->syncMovieVideos(movie: $movie);
+
+        return response()->json
+        (
+            [
+                'message' => 'Видео для конкретного фильма получены. Количество: ' . $movieVideos . '.',
                 'code' => JsonResponse::HTTP_CREATED
             ]
         );

@@ -9,6 +9,26 @@ class TMDBClientService
     private const string GENRES_ENDPOINT = '/3/genre/movie/list';
     private const string MOVIES_ENDPOINT = '/3/discover/movie';
     private const string MOVIE_CASTS_ENDPOINT = '/3/movie/%d/credits';
+    private const string MOVIE_IMAGES_ENDPOINT = '/3/movie/%d/images';
+    private const string MOVIE_VIDEOS_ENDPOINT = '/3/movie/%d/videos';
+
+    public function fetchMovieVideos(int $movieId): array
+    {
+        return $this->fetch
+        (
+            endpoint: sprintf(self::MOVIE_VIDEOS_ENDPOINT, $movieId),
+            params: ['api_key' => config('tmdb.TMDB_API_KEY')]
+        );
+    }
+
+    public function fetchMovieImages(int $movieId): array
+    {
+        return $this->fetch
+        (
+            endpoint: sprintf(self::MOVIE_IMAGES_ENDPOINT, $movieId),
+            params: ['api_key' => config('tmdb.TMDB_API_KEY')]
+        );
+    }
 
     public function fetchMovieCredits(int $movieId): array
     {
