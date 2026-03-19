@@ -36,7 +36,7 @@ class GetMovieGenresService
         return $imported;
     }
 
-    public function getMovieGenres(): array
+    private function getMovieGenres(): array
     {
         return $this->TMDBClientService->fetchGenres();
     }

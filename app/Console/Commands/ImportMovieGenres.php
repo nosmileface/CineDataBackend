@@ -27,6 +27,7 @@ class ImportMovieGenres extends Command
             $this->info('Синхронизация успешна. Жанров получено: ' . $genres. '. Затрачено времени: ' . $end - $start .  ' секунд(ы).');
 
             return CommandAlias::SUCCESS;
+
         } catch (\Exception $exception)
         {
             $this->error('Ошибка синхронизации. Исключение: ' . $exception->getMessage());
