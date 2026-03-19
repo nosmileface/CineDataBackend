@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\V1\Test;
 use App\Http\Controllers\Controller;
 use App\Models\Movie\Genre\MovieGenre;
 use App\Models\Movie\Movie;
-use App\Services\Movie\Cast\GetMovieCastsService;
+use App\Services\Movie\Credits\Cast\GetMovieCastsService;
 use App\Services\Movie\Genre\GetMovieGenresService;
 use App\Services\Movie\GetMoviesService;
 use Illuminate\Http\JsonResponse;

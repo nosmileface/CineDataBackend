@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Movie\Cast;
+namespace App\Models\Movie\Credits\Cast;
 
 use App\Models\Movie\Movie;
 use Illuminate\Database\Eloquent\Model;

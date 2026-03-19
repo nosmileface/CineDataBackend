@@ -2,7 +2,8 @@
 
 namespace App\Models\Movie;
 
-use App\Models\Movie\Cast\MovieCast;
+use App\Models\Movie\Credits\Cast\MovieCast;
+use App\Models\Movie\Credits\Crew\MovieCrew;
 use App\Models\Movie\Genre\MovieGenre;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -31,5 +32,11 @@ class Movie extends Model
     {
         return $this->belongsToMany(MovieCast::class, 'cast_movie', 'movie_id', 'cast_id')
             ->withPivot('character');
+    }
+
+    public function crews(): BelongsToMany
+    {
+        return $this->belongsToMany(MovieCrew::class, 'crew_movie', 'movie_id', 'crew_id')
+            ->withPivot('department');
     }
 }

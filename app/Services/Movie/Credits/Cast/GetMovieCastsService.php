@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Movie\Cast;
+namespace App\Services\Movie\Credits\Cast;
 
 use App\Models\Movie\Movie;
 use App\Repositories\Movie\Credits\Cast\MovieCastRepository;
@@ -26,13 +26,13 @@ class GetMovieCastsService
 
         $movieCasts = $this->getMovieCasts(movieId: $movie->tmdb_id);
 
-        if (empty($movieCasts[self::MOVIE_CASTS_KEY]))
-        {
-            return 0;
-        }
-
         foreach ($movieCasts[self::MOVIE_CASTS_KEY] as $movieCast)
         {
+            if (empty($movieCast))
+            {
+                continue;
+            }
+
             $data = $this->movieCastRepository->updateOrCreate(data: $movieCast);
 
             $ids[$data['id']] = ['character' => $movieCast['character']];
