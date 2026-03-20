@@ -2,16 +2,34 @@
 
 namespace App\Repositories\Movie;
 
+use App\Constants\Query;
 use App\Models\Movie\Movie;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class MovieRepository
 {
+    private const array RELATIONS =
+        [
+            'movieGenres',
+            'movieActors',
+            'movieCrews',
+            'movieImages',
+            'movieImages.type',
+            'movieVideos'
+        ];
+
     public function __construct(private Movie $movie){}
 
-    public function getAll(): Collection
+    public function getAllWithPagination(array $filters): LengthAwarePaginator
     {
-        return $this->movie->query()->get();
+        return $this->movie->query()
+            ->orderBy(Query::COLUMN_ID, Query::SORT_DESC)
+            ->paginate($filters['perPage'] ?? Query::PER_PAGE);
+    }
+
+    public function find(Movie $movie): Movie
+    {
+        return $this->movie->query()->with(self::RELATIONS)->findOrFail($movie->id);
     }
 
     public function updateOrCreate(array $data): Movie
@@ -35,11 +53,11 @@ class MovieRepository
 
     public function attachMovieCasts(Movie $movie, array $ids): void
     {
-        $movie->actors()->syncWithoutDetaching($ids);
+        $movie->movieActors()->syncWithoutDetaching($ids);
     }
 
     public function attachMovieCrews(Movie $movie, array $ids): void
     {
-        $movie->crews()->syncWithoutDetaching($ids);
+        $movie->movieCrews()->syncWithoutDetaching($ids);
     }
 }

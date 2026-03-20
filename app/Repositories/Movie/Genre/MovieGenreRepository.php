@@ -2,8 +2,10 @@
 
 namespace App\Repositories\Movie\Genre;
 
+use App\Constants\Query;
 use App\Models\Movie\Genre\MovieGenre;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 
 class MovieGenreRepository
@@ -13,6 +15,13 @@ class MovieGenreRepository
     public function getAll(): Collection
     {
         return $this->movieGenre->query()->get();
+    }
+
+    public function getAllWithPagination(array $filters): LengthAwarePaginator
+    {
+        return $this->movieGenre->query()
+            ->orderBy(Query::COLUMN_ID, Query::SORT_DESC)
+            ->paginate($filters['perPage'] ?? Query::PER_PAGE);
     }
 
     public function updateOrCreate(array $data): MovieGenre

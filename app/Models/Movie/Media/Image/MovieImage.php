@@ -27,6 +27,6 @@ class MovieImage extends Model
 
     public function type(): BelongsTo
     {
-        return $this->belongsTo(MovieImageType::class);
+        return $this->belongsTo(MovieImageType::class, 'movie_image_type_id');
     }
 }

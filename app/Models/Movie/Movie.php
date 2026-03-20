@@ -26,29 +26,29 @@ class Movie extends Model
         ];
 
     // Relations
-    public function genres(): BelongsToMany
+    public function movieGenres(): BelongsToMany
     {
         return $this->belongsToMany(MovieGenre::class, 'genre_movie', 'movie_id', 'genre_id');
     }
 
-    public function actors(): BelongsToMany
+    public function movieActors(): BelongsToMany
     {
         return $this->belongsToMany(MovieCast::class, 'cast_movie', 'movie_id', 'cast_id')
             ->withPivot('character');
     }
 
-    public function crews(): BelongsToMany
+    public function movieCrews(): BelongsToMany
     {
         return $this->belongsToMany(MovieCrew::class, 'crew_movie', 'movie_id', 'crew_id')
             ->withPivot('department');
     }
 
-    public function images(): HasMany
+    public function movieImages(): HasMany
     {
         return $this->hasMany(MovieImage::class);
     }
 
-    public function videos(): HasMany
+    public function movieVideos(): HasMany
     {
         return $this->hasMany(MovieVideo::class);
     }
