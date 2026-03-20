@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Repositories\Movie\Genre\MovieGenreRepository;
-use App\Services\Movie\GetMoviesService;
+use App\Jobs\SyncMoviesJob;
+use App\Services\Movie\Details\Genre\GetMovieGenresService;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
@@ -14,36 +14,26 @@ use Symfony\Component\Console\Command\Command as CommandAlias;
 #[Description('Синхронизация фильмов для каждого жанра.')]
 class ImportMovies extends Command
 {
-    private const int MOVIES_LIMIT_FOR_GENRE = 10;
+    private const int MOVIES_LIMIT_FOR_GENRE = 100;
 
     /**
      * Execute the console command.
      */
-    public function handle(GetMoviesService $getMoviesService, MovieGenreRepository $movieGenresRepository): int
+    public function handle(GetMovieGenresService $getMovieGenresService): int
     {
         try {
-            $count = 0;
+            $movieGenres = $getMovieGenresService->syncGenres();
 
-            $start = microtime(true);
-
-            $genres = $movieGenresRepository->getAll();
-
-            foreach ($genres as $genre)
+            foreach ($movieGenres as $movieGenre)
             {
-                $movies = $getMoviesService->syncMovies
+                SyncMoviesJob::dispatch
                 (
-                    movieGenre: $genre,
-                    limit: self::MOVIES_LIMIT_FOR_GENRE
-                );
-
-                $count += $movies;
+                    $movieGenre,
+                    self::MOVIES_LIMIT_FOR_GENRE
+                )->onQueue('genres');
             }
 
-            $end = microtime(true);
-
-            $this->info('Синхронизация успешна. Получено фильмов: ' . $count . '. Затрачено времени: ' . $end - $start . ' секунд(ы).');
-
-            Log::channel('import-movies')->info('Синхронизация успешна. Получено фильмов: ' . $count . '. Затрачено времени: ' . $end - $start . ' секунд(ы).');
+            $this->info('Синхронизация успешна. Получено фильмов: ' . count($movieGenres));
 
             return CommandAlias::SUCCESS;
 

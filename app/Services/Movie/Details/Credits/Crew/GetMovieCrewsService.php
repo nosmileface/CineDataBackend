@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Movie\Credits\Crew;
+namespace App\Services\Movie\Details\Credits\Crew;
 
 use App\Models\Movie\Movie;
 use App\Repositories\Movie\Credits\Crew\MovieCrewRepository;
@@ -9,7 +9,7 @@ use App\Services\TMDBClientService;
 
 class GetMovieCrewsService
 {
-    private const string MOVIE_CREWS_KEY = 'crew';
+    private const string RESPONSE_KEY_CREWS = 'crew';
 
     public function __construct
     (
@@ -26,7 +26,7 @@ class GetMovieCrewsService
 
         $movieCrews = $this->getMovieCrews(movieId: $movie->tmdb_id);
 
-        foreach ($movieCrews[self::MOVIE_CREWS_KEY] as $movieCrew)
+        foreach ($movieCrews[self::RESPONSE_KEY_CREWS] as $movieCrew)
         {
             if (empty($movieCrew))
             {

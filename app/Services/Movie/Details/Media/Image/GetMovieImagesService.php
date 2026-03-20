@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Movie\Media\Image;
+namespace App\Services\Movie\Details\Media\Image;
 
 use App\Models\Movie\Movie;
 use App\Repositories\Movie\Media\Image\MovieImageRepository;
@@ -9,7 +9,7 @@ use App\Services\TMDBClientService;
 
 class GetMovieImagesService
 {
-    private const array MOVIE_IMAGES_KEY =
+    private const array RESPONSE_KEY_IMAGES =
         [
             'backdrops' => 'backdrop',
             'logos' => 'logo',
@@ -29,7 +29,7 @@ class GetMovieImagesService
 
         $movieImages = $this->getMovieImages(movieId: $movie->tmdb_id);
 
-        foreach (self::MOVIE_IMAGES_KEY as $key => $value)
+        foreach (self::RESPONSE_KEY_IMAGES as $key => $value)
         {
             if (empty($movieImages[$key]))
             {

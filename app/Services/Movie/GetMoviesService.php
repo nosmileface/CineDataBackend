@@ -18,13 +18,13 @@ class GetMoviesService
         private MovieRepository         $movieRepository
     ){}
 
-    public function syncMovies(MovieGenre $movieGenre, int $limit): int
+    public function syncMovies(MovieGenre $movieGenre, int $limit): array
     {
         $ids = [];
 
-        $page = 1;
+        $syncMovies = [];
 
-        $imported = 0;
+        $page = 1;
 
         do
         {
@@ -41,7 +41,7 @@ class GetMoviesService
 
             foreach ($movies[self::MOVIES_KEY] as $movie)
             {
-                if ($imported >= $limit)
+                if (count($ids) >= $limit)
                 {
                     break 2;
                 }
@@ -50,12 +50,12 @@ class GetMoviesService
 
                 $ids[] = $data['id'];
 
-                $imported++;
+                $syncMovies[] = $data;
             }
 
             $page++;
 
-        } while ($imported <= $limit);
+        } while (true);
 
         if ($ids)
         {
@@ -66,7 +66,7 @@ class GetMoviesService
             );
         }
 
-        return $imported;
+        return $syncMovies;
     }
 
     private function getMovies(int $movieGenreId, int $page): array

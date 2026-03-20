@@ -12,12 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withSchedule(function (\Illuminate\Console\Scheduling\Schedule $schedule): void {
-        $schedule->command('app:import-movie-genres')->daily();
         $schedule->command('app:import-movies')->daily();
-        $schedule->command('app:import-movie-casts')->daily();
-        $schedule->command('app:import-movie-crews')->daily();
-        $schedule->command('app:import-movie-images')->daily();
-        $schedule->command('app:import-movie-videos')->daily();
     })
     ->withMiddleware(function (Middleware $middleware): void {
         //

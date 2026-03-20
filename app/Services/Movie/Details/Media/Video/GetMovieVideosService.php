@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Movie\Media\Video;
+namespace App\Services\Movie\Details\Media\Video;
 
 use App\Models\Movie\Movie;
 use App\Repositories\Movie\Media\Video\MovieVideoRepository;
