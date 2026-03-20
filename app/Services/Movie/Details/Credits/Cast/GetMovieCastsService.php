@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Movie\Credits\Cast;
+namespace App\Services\Movie\Details\Credits\Cast;
 
 use App\Models\Movie\Movie;
 use App\Repositories\Movie\Credits\Cast\MovieCastRepository;
@@ -9,7 +9,7 @@ use App\Services\TMDBClientService;
 
 class GetMovieCastsService
 {
-    private const string MOVIE_CASTS_KEY = 'cast';
+    private const string RESPONSE_KEY_CASTS = 'cast';
 
     public function __construct
     (
@@ -26,7 +26,7 @@ class GetMovieCastsService
 
         $movieCasts = $this->getMovieCasts(movieId: $movie->tmdb_id);
 
-        foreach ($movieCasts[self::MOVIE_CASTS_KEY] as $movieCast)
+        foreach ($movieCasts[self::RESPONSE_KEY_CASTS] as $movieCast)
         {
             if (empty($movieCast))
             {

@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Api\V1\Test;
 use App\Http\Controllers\Controller;
 use App\Models\Movie\Genre\MovieGenre;
 use App\Models\Movie\Movie;
-use App\Services\Movie\Credits\Cast\GetMovieCastsService;
-use App\Services\Movie\Credits\Crew\GetMovieCrewsService;
-use App\Services\Movie\Genre\GetMovieGenresService;
+use App\Services\Movie\Details\Credits\Cast\GetMovieCastsService;
+use App\Services\Movie\Details\Credits\Crew\GetMovieCrewsService;
+use App\Services\Movie\Details\Genre\GetMovieGenresService;
+use App\Services\Movie\Details\Media\Image\GetMovieImagesService;
+use App\Services\Movie\Details\Media\Video\GetMovieVideosService;
 use App\Services\Movie\GetMoviesService;
-use App\Services\Movie\Media\Image\GetMovieImagesService;
-use App\Services\Movie\Media\Video\GetMovieVideosService;
 use Illuminate\Http\JsonResponse;
 
 class TestController extends Controller
@@ -35,7 +35,7 @@ class TestController extends Controller
         return response()->json
         (
             [
-                'message' => 'Жанры фильмов получены. Количество: ' . $genres . ' жанров.',
+                'message' => 'Жанры фильмов получены. Количество: ' . count($genres) . ' жанров.',
                 'code' => JsonResponse::HTTP_CREATED
             ]
         );
@@ -52,7 +52,7 @@ class TestController extends Controller
         return response()->json
         (
             [
-                'message' => 'Фильмы для конкретного жанра получены. Количество: ' . $movies . ' фильмов.',
+                'message' => 'Фильмы для конкретного жанра получены. Количество: ' . count($movies) . ' фильмов.',
                 'code' => JsonResponse::HTTP_CREATED
             ]
         );
