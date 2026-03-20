@@ -7,6 +7,7 @@ use App\Services\Movie\GetMoviesService;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Command\Command as CommandAlias;
 
 #[Signature('app:import-movies')]
@@ -42,11 +43,15 @@ class ImportMovies extends Command
 
             $this->info('Синхронизация успешна. Получено фильмов: ' . $count . '. Затрачено времени: ' . $end - $start . ' секунд(ы).');
 
+            Log::channel('import-movies')->info('Синхронизация успешна. Получено фильмов: ' . $count . '. Затрачено времени: ' . $end - $start . ' секунд(ы).');
+
             return CommandAlias::SUCCESS;
 
         } catch (\Exception $exception)
         {
             $this->error('Ошибка синхронизации. Исключение: ' . $exception->getMessage());
+
+            Log::channel('import-movies')->error('Ошибка синхронизации. Исключение: ' . $exception->getMessage());
 
             return CommandAlias::FAILURE;
         }

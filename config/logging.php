@@ -127,6 +127,36 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        'import-movie-genres' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/import/movie-genres/import-movie-genres.log')
+        ],
+
+        'import-movies' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/import/movies/import-movies.log')
+        ],
+
+        'import-movie-casts' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/import/movie-casts/import-movie-casts.log')
+        ],
+
+        'import-movie-crews' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/import/movie-crews/import-movie-crews.log')
+        ],
+
+        'import-movie-images' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/import/movie-images/import-movie-images.log')
+        ],
+
+        'import-movie-videos' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/import/movie-videos/import-movie-videos.log')
+        ]
+
     ],
 
 ];

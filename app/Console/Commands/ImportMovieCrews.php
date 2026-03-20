@@ -7,6 +7,7 @@ use App\Services\Movie\Credits\Crew\GetMovieCrewsService;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Command\Command as CommandAlias;
 
 #[Signature('app:import-movie-crews')]
@@ -36,11 +37,15 @@ class ImportMovieCrews extends Command
 
             $this->info('Синхронизация успешна. Получено членов команд: ' . $count . '. Затрачено времени: ' . $end - $start . ' секнд(ы).');
 
+            Log::channel('import-movie-crews')->info('Синхронизация успешна. Получено членов команд: ' . $count . '. Затрачено времени: ' . $end - $start . ' секнд(ы).');
+
             return CommandAlias::SUCCESS;
 
         } catch (\Exception $exception)
         {
             $this->error('Ошибка синхронизации. Исключение: ' . $exception->getMessage());
+
+            Log::channel('import-movie-crews')->error('Ошибка синхронизации. Исключение: ' . $exception->getMessage());
 
             return CommandAlias::FAILURE;
         }
