@@ -1,58 +1,97 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Movie Sync API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Простой Laravel API для демонстрации навыков владения фреймворком и синхронизации фильмов и жанров с внешнего источника. Использует очереди для обновления деталей фильмов.
 
-## About Laravel
+## Установка
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Клонируйте репозиторий:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+``` git clone https://github.com/nosmileface/CineDataBackend ```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+``` cd CineDataBackend ```
 
-## Learning Laravel
+### Установите зависимости через Composer:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+``` composer install ```
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```Создайте файл `.env` и настройте его: ```
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+``` cp .env.example .env ```
 
-## Agentic Development
+``` php artisan key:generate ```
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+``` Доступы для сервиса TMDB ```
 
-```bash
-composer require laravel/boost --dev
+``` TMDB_API_URL= ```
+``` TMDB_API_KEY= ```
 
-php artisan boost:install
-```
+Убедитесь, что файл базы данных существует:
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+``` touch database/database.sqlite ```
 
-## Contributing
+Запустите миграции:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+``` php artisan migrate ```
 
-## Code of Conduct
+## Очереди
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Создайте таблицу для очередей и мигрируйте:
 
-## Security Vulnerabilities
+``` php artisan queue:table ```
+``` php artisan migrate ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Запустите обработчик очередей:
 
-## License
+``` php artisan queue:work --queue=genres,movies ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Синхронизация фильмов
+
+Запустите команду:
+
+``` php artisan app:import-movies ```
+
+
+## API эндпоинты
+
+Префикс: `/api/v1`
+
+| Метод | URL | Контроллер | Назначение |
+|-------|-----|------------|------------|
+| GET | `/movie-genres` | `MovieGenreController@index` | Получить список жанров |
+| GET | `/movies` | `MovieController@index` | Список фильмов |
+| GET | `/movies/{movie}` | `MovieController@show` | Детали фильма |
+
+
+GET /movie-genres - (perPage / page / sort:id_desc,id_asc) - опционально
+
+Тестовые эндпоинты (`/api/v1/test`):
+
+- `/test/movie-genres` — тестовые жанры
+- `/test/movies/{movieGenre}` — фильмы по жанру
+- `/test/movies/{movie}/casts` — актёры фильма
+- `/test/movies/{movie}/crews` — команда фильма
+- `/test/movies/{movie}/images` — изображения
+- `/test/movies/{movie}/videos` — видео
+
+
+## Логирование
+
+Логи для импорта фильмов и жанров сохраняются в каналах `import-movies` и `import-movie-genres` (настраивается в `config/logging.php`).
+
+## Локальное тестирование логики
+
+Получите тестовые жанры:
+
+``` GET /api/v1/test/movie-genres ``` 
+
+Получите фильмы по жанру:
+
+``` GET /api/v1/test/movies/{movieGenreId} ```
+
+Получите детали фильма:
+
+``` GET /api/v1/test/movies/{movieId}/casts ```  
+``` GET /api/v1/test/movies/{movieId}/crews ```  
+``` GET /api/v1/test/movies/{movieId}/images ```  
+``` GET /api/v1/test/movies/{movieId}/videos ```
+ локальной разработке, синхронизации фильмов через ваши сервисы и тестированию логики через API.
