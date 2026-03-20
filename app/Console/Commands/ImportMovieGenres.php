@@ -6,6 +6,7 @@ use App\Services\Movie\Genre\GetMovieGenresService;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Console\Command\Command as CommandAlias;
 
 #[Signature('app:import-movie-genres')]
@@ -26,11 +27,15 @@ class ImportMovieGenres extends Command
 
             $this->info('Синхронизация успешна. Жанров получено: ' . $genres. '. Затрачено времени: ' . $end - $start .  ' секунд(ы).');
 
+            Log::channel('import-movie-genres')->info('Синхронизация успешна. Жанров получено: ' . $genres. '. Затрачено времени: ' . $end - $start .  ' секунд(ы).');
+
             return CommandAlias::SUCCESS;
 
         } catch (\Exception $exception)
         {
             $this->error('Ошибка синхронизации. Исключение: ' . $exception->getMessage());
+
+            Log::channel('import-movie-genres')->error('Ошибка синхронизации. Исключение: ' . $exception->getMessage());
 
             return CommandAlias::FAILURE;
         }
