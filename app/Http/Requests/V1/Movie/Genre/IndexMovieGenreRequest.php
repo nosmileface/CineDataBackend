@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\V1\Movie;
+namespace App\Http\Requests\V1\Movie\Genre;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -23,6 +23,8 @@ class IndexMovieGenreRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'sort' => ['sometimes', 'string', 'in:id_asc,id_desc'],
+
             'perPage' => ['sometimes', 'integer', 'min:1', 'max:100'],
             'page' => ['sometimes', 'integer', 'min:1']
         ];

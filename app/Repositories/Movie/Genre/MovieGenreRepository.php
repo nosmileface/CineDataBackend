@@ -20,6 +20,7 @@ class MovieGenreRepository
     public function getAllWithPagination(array $filters): LengthAwarePaginator
     {
         return $this->movieGenre->query()
+            ->applySort($filters['sort'] ?? [])
             ->orderBy(Query::COLUMN_ID, Query::SORT_DESC)
             ->paginate($filters['perPage'] ?? Query::PER_PAGE);
     }
