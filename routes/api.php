@@ -4,9 +4,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1;
 
 Route::prefix('v1')->group(function () {
+
+    Route::get('movie-genres', [
+        V1\Movie\Genre\MovieGenreController::class, 'index'
+    ])->name('index.movie.genres');
+
+    Route::apiResource('movies',
+        V1\Movie\MovieController::class
+    )->only('index', 'show');
+
+    // Test controllers
     Route::prefix('test')->group(function () {
 
-        Route::get('genres', [
+        Route::get('movie-genres', [
             V1\Test\TestController::class, 'GetGenres'
         ])->name('get.movie.genres');
 
