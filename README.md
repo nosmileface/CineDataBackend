@@ -22,9 +22,9 @@
 
 ### Доступы для сервиса TMDB
 
-``` TMDB_API_URL=https://api.themoviedb.org ```
+``` TMDB_API_URL= ```
 
-``` TMDB_API_KEY=eafa6b6a453ad37c0002d976dff5dc97 ```
+``` TMDB_API_KEY= ```
 
 Убедитесь, что файл базы данных существует:
 
